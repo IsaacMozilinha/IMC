@@ -9,7 +9,7 @@ Kauê Dantas RA: 23025287
 
 Giovanne Braga RA: 23025648
 
-O repositório da aplicação se encontra na branch **master**
+**O repositório da aplicação se encontra na branch master**
 
 # Alterações realizadas:
 
