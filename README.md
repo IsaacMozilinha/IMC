@@ -23,7 +23,7 @@ Atualização do placeholder;
 
 Inclusão da função para limpar.
 
-#Como foi feito:
+# Como foi feito:
 
 **Validação de campos não preenchidos**
 
