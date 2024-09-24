@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Tratativa para que os campos sejam preenchidos (semelhante ao required do HTML
-        if (peso.isEmpty() || altura.isEmpty()) {
+        if (peso.isEmpty() || altura.isEmpty() || nome.isEmpty()) {
             resultado1.setText("Preencha todos os campos!");
             return;
         }
