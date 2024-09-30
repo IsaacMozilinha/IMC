@@ -66,9 +66,7 @@ Intent intent;
 
 Foi utilizado um método na Activity "finish()":
  public void fecharJanela(View view) {
-        finish();
-
-    }
+        finish();}
 
 
 
