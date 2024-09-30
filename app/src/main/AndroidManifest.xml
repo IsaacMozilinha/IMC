@@ -13,6 +13,24 @@
         android:theme="@style/Theme.Text"
         tools:targetApi="31">
         <activity
+            android:name=".Obesidade3"
+            android:exported="false" />
+        <activity
+            android:name=".Obesidade2"
+            android:exported="false" />
+        <activity
+            android:name=".Obesidade"
+            android:exported="false" />
+        <activity
+            android:name=".Sobrepeso"
+            android:exported="false" />
+        <activity
+            android:name=".PesoNormal"
+            android:exported="false" />
+        <activity
+            android:name=".AbaixodoPeso"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

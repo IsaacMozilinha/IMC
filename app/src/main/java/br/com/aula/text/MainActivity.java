@@ -1,8 +1,8 @@
 package br.com.aula.text;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DecimalFormat;
-// Atributos
+
 public class MainActivity extends AppCompatActivity {
 
     private TextInputEditText campoNome;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Componentes com seus IDs
+        // Inicializar os componentes
         campoNome = findViewById(R.id.textInputNome);
         campoPeso = findViewById(R.id.textInputPeso);
         campoAltura = findViewById(R.id.textInputAltura);
@@ -46,14 +46,13 @@ public class MainActivity extends AppCompatActivity {
         radioGroupSexo = findViewById(R.id.radioGroupSexo);
     }
 
-    // Método de calculo IMC:
+    // Método para calcular o IMC
     public void calculaImc(View view) {
         String nome = campoNome.getText().toString();
         String peso = campoPeso.getText().toString();
         String altura = campoAltura.getText().toString();
 
-
-        // Tratativa para que os campos sejam preenchidos (semelhante ao required do HTML
+        // Validação dos campos
         if (peso.isEmpty() || altura.isEmpty() || nome.isEmpty()) {
             resultado1.setText("Preencha todos os campos!");
             return;
@@ -64,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
             Double numAltura = Double.parseDouble(altura);
             Double numImc = numPeso / (numAltura * numAltura);
 
-            // Formatar o IMC em duas casas decimais
+            // Formatação do IMC
             DecimalFormat df = new DecimalFormat("##.##");
             String imc = df.format(numImc);
 
             resultado1.setText("IMC: " + imc);
 
-            // Bloco para verificar qual botão Radio  está selecionado
+            // Verificar qual sexo foi selecionado
             int selectedId = radioGroupSexo.getCheckedRadioButtonId();
             String sexo;
 
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            // Condicional para classificar o IMC de acordo com o sexo (já que há variações)
+            // Determinar a classificação do IMC
             String classificacao;
             if (sexo.equals("Masculino")) {
                 if (numImc < 18.5) {
@@ -92,14 +91,12 @@ public class MainActivity extends AppCompatActivity {
                     classificacao = "Peso normal";
                 } else if (numImc < 29.9) {
                     classificacao = "Sobrepeso";
-                } else if (numImc < 34.9){
+                } else if (numImc < 34.9) {
                     classificacao = "Obesidade";
                 } else if (numImc < 39.9) {
                     classificacao = "Obesidade II";
-                }else{
-
+                } else {
                     classificacao = "Obesidade III";
-
                 }
             } else {
                 if (numImc < 18.5) {
@@ -112,20 +109,38 @@ public class MainActivity extends AppCompatActivity {
                     classificacao = "Obesidade";
                 } else if (numImc < 38.9) {
                     classificacao = "Obesidade II";
-                }
-                else {
+                } else {
                     classificacao = "Obesidade III";
                 }
             }
 
             resultado2.setText("Classificação: " + classificacao);
 
+            // Navegar para a Activity correspondente à classificação
+            Intent intent;
+            if (classificacao.equals("Abaixo do peso")) {
+                intent = new Intent(this, AbaixodoPeso.class);
+            } else if (classificacao.equals("Peso normal")) {
+                intent = new Intent(this, PesoNormal.class);
+            } else if (classificacao.equals("Sobrepeso")) {
+                intent = new Intent(this, Sobrepeso.class);
+            } else if (classificacao.equals("Obesidade")) {
+                intent = new Intent(this, Obesidade.class);
+            } else if (classificacao.equals("Obesidade II")) {
+                intent = new Intent(this, Obesidade2.class);
+            } else {
+                intent = new Intent(this, Obesidade3.class);
+            }
+
+            // Iniciar a Activity
+            startActivity(intent);
+
         } catch (NumberFormatException e) {
             resultado1.setText("Valores inválidos!");
         }
     }
 
-    // Método para fazer a  limpeza dos dados:
+    // Método para limpar os dados
     public void limpaDados(View view) {
         campoNome.setText("");
         campoPeso.setText("");
